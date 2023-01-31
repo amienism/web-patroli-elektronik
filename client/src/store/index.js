@@ -5,6 +5,7 @@ export const store = new Vuex.Store({
   state: {
     layout: 'appLayout',
     loader: false,
+    user: null,
   },
   mutations: {
     SET_LAYOUT (state, payload) {
@@ -13,6 +14,9 @@ export const store = new Vuex.Store({
     SET_LOADER (state, payload) {
       state.loader = payload
     },
+    SET_USER(state, payload){
+      state.user = payload
+    }
   },
   getters: {
     layout (state) {

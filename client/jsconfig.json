@@ -14,6 +14,8 @@
       "dom",
       "dom.iterable",
       "scripthost"
-    ]
+    ],
+    "noImplicitAny": false,
+    "allowJs": true,
   }
 }

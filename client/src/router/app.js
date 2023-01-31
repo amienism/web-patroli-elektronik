@@ -14,4 +14,9 @@ export default [
         name: "scan-failed",
         component: () => import("@/pages/app/failed.vue"),
     },
+    {
+        path: "/app/scanner",
+        name: "scanner",
+        component: () => import("@/pages/app/scanner.vue"),
+    },
 ];
