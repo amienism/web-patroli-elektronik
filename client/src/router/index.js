@@ -4,6 +4,7 @@ import {
 } from 'vue-router'
 import authRouter from './auth'
 import appRouter from './app'
+import adminRouter from './admin'
 import store from '@/store'
 import axios from 'axios'
 
@@ -13,7 +14,8 @@ const routes = [{
     component: () => import('@/pages/welcome.vue')
   },
   ...authRouter,
-  ...appRouter
+  ...appRouter,
+  ...adminRouter,
 ]
 
 const router = createRouter({
@@ -24,8 +26,6 @@ const router = createRouter({
 router.beforeEach(async (to, from, next) => {
   store.commit('SET_LOADER', true);
 
-  console.log(to.path)
-  
   if (to.path.includes("/auth/") || to.path == "/") {
     if(localStorage.getItem('token') !== null){
       next({
@@ -41,6 +41,10 @@ router.beforeEach(async (to, from, next) => {
     const {data: {data:{token, user}}} = await axios.get("/auth/validate");
     localStorage.setItem('token', token);
     store.commit('SET_USER', user);
+    if(to.path === '/app' && user.role === 'admin'){
+      next({path: '/admin/dashboard'})
+      return; 
+  }
     next();
   } catch (error) {
     next({

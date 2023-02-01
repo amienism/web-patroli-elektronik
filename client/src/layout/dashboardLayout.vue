@@ -1,20 +1,18 @@
 <template>
-    <!-- <v-layout>
-            <Sidebar />
+    <v-layout>
+        <Sidebar />
             <v-main>
                 <v-app-bar-nav-icon variant="text" @click.stop="handleDrawer"></v-app-bar-nav-icon>
                 <div class="pa-5">
-                    <template v-if="$store.state.mobile && $store.state.drawer">
-                    </template>
-                    <template v-else>
                         <RouterView />
-                    </template>
                 </div>
             </v-main>
-    </v-layout> -->
+    </v-layout>
+    
 </template>
 
 <script>
+import Sidebar from '@/components/Sidebar.vue';
 
 export default {
     data() {
@@ -22,8 +20,13 @@ export default {
             
         }
     },
+    components: {
+        Sidebar
+    },
     methods: {
-        
+        handleDrawer(){
+            this.$store.state.drawer = !this.$store.state.drawer
+        }
     },
     
 }
@@ -31,7 +34,7 @@ export default {
 
 <style scoped>
 .v-layout {
-    background-color: #DE7189;
+    background-color: #e9efff;
 }
 
 .v-main {

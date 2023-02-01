@@ -20,6 +20,9 @@
             return {
                 img: landing_page_img
             }
+        },
+        beforeMount() {
+            this.$store.commit('SET_LAYOUT', 'appLayout')
         }
     }
 </script>

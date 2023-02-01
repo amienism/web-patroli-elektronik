@@ -8,7 +8,7 @@
 <script>
     import appLayout from './layout/appLayout.vue';
     import dashboardLayout from './layout/dashboardLayout.vue';
-
+    import blankLayout from './layout/blankLayout.vue';
 
     export default {
         computed: {
@@ -18,7 +18,8 @@
         },
         components: {
             'dashboardLayout': dashboardLayout,
-            'appLayout': appLayout
+            'appLayout': appLayout,
+            'blankLayout': blankLayout
             // define as many layouts you want for the application
         }
     }

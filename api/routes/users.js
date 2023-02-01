@@ -9,9 +9,9 @@ const jwtAuth = require('../middleware/jwtAuth')
 router.get('/', paginate.middleware(10, 50), async function(req, res, next) {
   try {
     const users = await model.users.findAndCountAll({
-      attributes: ['user_id', 'email', 'name', 'createdAt', 'updatedAt'],
+      attributes: ['user_id', 'email', 'name', 'role', 'createdAt', 'updatedAt'],
       limit: req.query.limit,
-      offset: req.skip
+      offset: req.skip,
     });
 
     if(users.count > 0 ){
@@ -92,7 +92,7 @@ router.post('/', async function(req, res, next) {
 router.get('/:id', async function(req, res, next) {
   try {
     const users = await model.users.findOne({
-      attributes: ['user_id', 'email', 'name', 'createdAt', 'updatedAt'],
+      attributes: ['user_id', 'email', 'name', 'role', 'createdAt', 'updatedAt'],
       where: {
         user_id: req.params.id
       }
@@ -104,7 +104,7 @@ router.get('/:id', async function(req, res, next) {
         'data': users
       })
     } else {
-      res.json({
+      res.status(400).json({
         'status': 'ERROR',
         'messages': 'User not found',
         'data': {}
@@ -169,7 +169,16 @@ router.delete('/:id', async function(req, res, next) {
         user_id: req.params.id
       }
     });
-    res.send({
+
+    if(!users){
+      return res.status(400).json({
+          'status': 'ERROR',
+          'messages': 'User Not Found!',
+          'data': {}
+        })
+    }
+
+    res.json({
       'status': 'OK',
       'messages': 'Delete success',
       'data': {}

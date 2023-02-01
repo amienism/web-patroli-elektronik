@@ -31,7 +31,10 @@ export default {
             localStorage.removeItem('token');
             this.$router.push('/')
         }
-    }
+    },
+    beforeMount() {
+            this.$store.commit('SET_LAYOUT', 'appLayout')
+        }
 }
 
 </script>

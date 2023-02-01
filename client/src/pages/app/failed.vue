@@ -20,7 +20,10 @@ export default {
         return{
             error_img: error_img
         }
-    }
+    },
+    beforeMount() {
+            this.$store.commit('SET_LAYOUT', 'appLayout')
+        }
 }
 
 </script>

@@ -22,7 +22,10 @@ export default {
         return{
             success_img: success_img
         }
-    }
+    },
+    beforeMount() {
+            this.$store.commit('SET_LAYOUT', 'appLayout')
+        }
 }
 
 </script>

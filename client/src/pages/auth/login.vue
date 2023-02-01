@@ -6,7 +6,7 @@
         </v-text-field>
         <v-text-field v-model="formData.password" type="password" label="Password" density="compact" variant="solo" bg-color="grey-lighten-4">
         </v-text-field>
-        <v-btn type="submit" color="primary">Masuk</v-btn>
+        <v-btn type="submit" color="primary" :loading="btn_loader">Masuk</v-btn>
     </form>
     <div class="d-flex h-100 align-end justify-center">
         <span>
@@ -33,11 +33,13 @@
                 snackbar: false,
                 snackbar_msg: '',
                 snackbarVariant: '',
+                btn_loader: false,
                 formData: {}
             }
         },
         methods: {
             async handleLogin(){
+                this.btn_loader = true;
                 try {
                     const {data: {
                         messages, data: {
@@ -48,11 +50,13 @@
                     this.snackbar_msg = messages;
                     this.snackbarVariant = 'success';
                     this.snackbar = true;
+                    this.btn_loader = false;
                     this.$router.push('/app')
                 } catch ({response: {data: {messages}}}) {
                     this.snackbarVariant = 'warning';
                     this.snackbar_msg = messages;
                     this.snackbar = true;
+                    this.btn_loader = false;
                 }
             }
         },

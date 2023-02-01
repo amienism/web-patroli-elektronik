@@ -3,9 +3,10 @@ import vuetify from '../plugins/vuetify'
 
 export const store = new Vuex.Store({
   state: {
-    layout: 'appLayout',
+    layout: 'blankLayout',
     loader: false,
     user: null,
+    drawer: true,
   },
   mutations: {
     SET_LAYOUT (state, payload) {
@@ -16,6 +17,9 @@ export const store = new Vuex.Store({
     },
     SET_USER(state, payload){
       state.user = payload
+    },
+    SET_DRAWER(state, payload){
+      state.drawer = payload
     }
   },
   getters: {
