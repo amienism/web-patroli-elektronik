@@ -40,8 +40,8 @@ router.post('/login', async function(req, res, next) {
                 email: req.body.email
             }
         })
-
-        const token = jwt.sign(dataValues, secret.APISecret);
+        // Token expired 60s * 30 = 30m
+        const token = jwt.sign(dataValues, secret.APISecret, {expiresIn: 60 * 30});
 
         res.json({
             'status': 'OK',
@@ -81,6 +81,8 @@ router.get('/validate', async function(req, res, next){
         const token = authHeader.split(' ')[1];
 
         const user = jwt.verify(token, secret.APISecret);
+        delete user.iat;
+        delete user.exp;
         const verifyUser = await model.users.findOne({
             attributes: ['user_id','name','email','role'],
             where: {
@@ -96,7 +98,7 @@ router.get('/validate', async function(req, res, next){
             })
         }
 
-        const newToken = jwt.sign(user, secret.APISecret)
+        const newToken = jwt.sign(user, secret.APISecret, {expiresIn: 60 * 30})
         res.json({
             'status': 'OK',
             'messages': 'Authentication Success',

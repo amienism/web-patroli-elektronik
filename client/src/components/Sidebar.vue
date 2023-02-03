@@ -10,7 +10,8 @@
         </div>
         <v-list color="transparent">
             <v-list-item prepend-icon="mdi-chart-pie" title="Dashboard" href="/admin/dashboard"></v-list-item>
-            <v-list-item prepend-icon="mdi-map-marker" title="Patrol Location" href="/admin/patrols"></v-list-item>
+            <v-list-item prepend-icon="mdi-office-building-marker" title="Patrol" href="/admin/patrol"></v-list-item>
+            <v-list-item prepend-icon="mdi-map-marker" title="Patrol Location" href="/admin/location"></v-list-item>
             <v-list-item prepend-icon="mdi-account" title="User Management" href="/admin/users"></v-list-item>
           </v-list>
           

@@ -253,7 +253,7 @@
             async submitAdd() {
                 this.btn_loader = true;
                 try {
-                    var qr_code = this.formData.name.replace(' ', '_')
+                    var qr_code = this.formData.name.replace(/ /g, '_')
                     let formData = {
                         name: this.formData.name,
                         qr_code: `http://192.168.0.232:5000/scan/${qr_code}`

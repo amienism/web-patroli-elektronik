@@ -16,15 +16,25 @@ module.exports = {
     */
    const password = bcrypt.hashSync('1234', 10);
 
-     await queryInterface.bulkInsert('users', [{
+     await queryInterface.bulkInsert('users', [
+      {
        name: 'admin',
        email: 'admin@admin.com',
        password: password,
        role: 'admin',
        createdAt: new Date(),
        updatedAt: new Date()
-       
-    }], {});
+    },
+      {
+       name: 'user',
+       email: 'user@user.com',
+       password: password,
+       role: 'security',
+       createdAt: new Date(),
+       updatedAt: new Date()
+    },
+  
+  ], {});
   },
 
   async down (queryInterface, Sequelize) {

@@ -9,7 +9,8 @@ const cors = require('cors')
 
 var authRouter = require('./routes/auth');
 var usersRouter = require('./routes/users');
-var locationRouter = require('./routes/locations')
+var locationRouter = require('./routes/locations');
+var patrolRouter = require('./routes/patrols')
 
 var app = express();
 
@@ -30,6 +31,7 @@ app.use(jwtAuth.authenticateJWT)
 app.use('/api/auth', authRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/locations', locationRouter);
+app.use('/api/patrol', patrolRouter);
 
 // catch 404 and forward to error handler
 // app.use(function(req, res, next) {

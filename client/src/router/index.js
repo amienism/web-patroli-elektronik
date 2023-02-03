@@ -27,15 +27,9 @@ router.beforeEach(async (to, from, next) => {
   store.commit('SET_LOADER', true);
 
   if (to.path.includes("/auth/") || to.path == "/") {
-    if(localStorage.getItem('token') !== null){
-      next({
-        path: '/app'
-      })
-    } else {
-      next();
-      return;
-    }
-  }
+    next();
+    return;
+}
 
   try {
     const {data: {data:{token, user}}} = await axios.get("/auth/validate");
@@ -43,8 +37,8 @@ router.beforeEach(async (to, from, next) => {
     store.commit('SET_USER', user);
     if(to.path === '/app' && user.role === 'admin'){
       next({path: '/admin/dashboard'})
-      return; 
-  }
+      return;
+    }
     next();
   } catch (error) {
     next({

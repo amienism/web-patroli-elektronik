@@ -5,6 +5,8 @@ import store from './store'
 import vuetify from './plugins/vuetify'
 import { loadFonts } from './plugins/webfontloader'
 import axios from 'axios'
+import dayjs from 'dayjs'
+import dayjslocale from "dayjs/locale/id";
 
 loadFonts()
 
@@ -25,8 +27,26 @@ axios.interceptors.request.use(
   }
 );
 
-createApp(App)
-  .use(router)
-  .use(store)
+dayjs.locale("id");
+
+const app = createApp(App)
+
+app.mixin({
+  methods: {
+      // dayjslocale,
+      dayjs,
+      dateFormat(value) {
+          return dayjs(value).format("dddd, DD MMM YYYY");
+      },
+      timeFormat(value){
+        return dayjs(value).format("HH:mm")
+      }
+    }
+}
+)
+
+app
+.use(router)
+.use(store)
   .use(vuetify)
   .mount('#app')

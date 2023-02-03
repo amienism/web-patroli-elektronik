@@ -10,8 +10,13 @@ export default [
         component: () => import("@/pages/admin/users.vue"),
     },
     {
-        path: "/admin/patrols",
+        path: "/admin/location",
+        name: "lcoation-management",
+        component: () => import("@/pages/admin/location.vue"),
+    },
+    {
+        path: "/admin/patrol",
         name: "patrol-management",
-        component: () => import("@/pages/admin/patrols.vue"),
+        component: () => import("@/pages/admin/patrol.vue"),
     },
 ];
